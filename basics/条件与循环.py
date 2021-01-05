@@ -13,5 +13,3 @@ while True:
         print('Encountered error: {}'.format(err))
         break
 
-
-# Exe
