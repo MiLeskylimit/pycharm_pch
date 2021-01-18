@@ -29,3 +29,4 @@ async def main(urls):
         await task
 
 asyncio.run(main(['url_1', 'url_2', 'url_3', 'url_4']))
+0
