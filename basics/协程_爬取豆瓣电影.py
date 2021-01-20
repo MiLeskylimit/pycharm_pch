@@ -1,15 +1,23 @@
-# ∆’Õ®≈¿»°
+# -*- coding: utf-8 -*-
+# ÊôÆÈÄöÁà¨Âèñ
 import requests
 from bs4 import BeautifulSoup
 import lxml
 
 def main():
     url = "https://movie.douban.com/cinema/later/beijing/"
-    init_page = requests.get(url).content
+    head = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36',
+        'Referer': 'https://time.geekbang.org/column/article/101855',
+        'Connection': 'keep-alive'}
+    init_page = requests.get(url, headers=head).content
+    print(init_page)
     init_soup = BeautifulSoup(init_page, "lxml")
 
     all_movies = init_soup.find('div', id="showing-soon")
     for each_movie in all_movies.find_all('div', class_="item"):
+        print(each_movie)
+
         all_a_tag = each_movie.find_all('a')
         all_li_tag = each_movie.find_all('li')
 
@@ -25,12 +33,12 @@ def main():
 
 main()
 
-# –≠≥Ã≈¿»°
+# ÂçèÁ®ãÁà¨Âèñ
 import asyncio
 import aiohttp
-
 from bs4 import BeautifulSoup
 
+header = {}
 async def fetch_content(url):
     async with aiohttp.ClientSession(
         headers=header, connector=aiohttp.TCPConnector(ssl=False)
